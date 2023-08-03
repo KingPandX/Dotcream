@@ -18,7 +18,7 @@
 
 5. **Step 4:** run `./install.sh`
 
-![alt](./screenshots/2023-08-01-170223_hyprshot.png)
+![Screenshot of desktop](./screenshots/2023-08-01-170223_hyprshot.png)
 
 ## Change the Wallpaper and the colors scheme
 
