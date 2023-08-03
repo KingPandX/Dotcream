@@ -1,0 +1,196 @@
+//General
+
+@import "colors.scss";
+*{
+    all: unset;
+    font-family: 'FiraCode Nerd Font Propo';
+  }
+  
+  window {
+    color: $c4;
+  
+    & > * {
+      margin: 3px;
+    }
+  }
+
+  //reloj wallpaper
+  .timer{
+    background: rgba($bg, 0.3);
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+    border: 8px double $c6;
+    padding: 50px 0px;
+    font-size: xx-large;
+    font-weight: bold;
+    text-shadow: 3px 4px 8px rgba($c6,0.8);
+    
+    
+  }
+
+  //Barra de estado
+  .baras{
+    border-radius: 8px;
+    background: rgba($bg, 0.56);
+  }
+
+  .workSpace {
+    background: rgba($bg, 0.3);
+    border-radius: 6px;
+    border-style: solid;
+    border-color: $c6;
+    border-width: 2px;
+    padding: 5px;
+  }
+
+  .music scale trough highlight {
+    all: unset;
+    background-color: $c4;
+    color: $c6;
+    border-radius: 0px;
+  }
+  .music scale trough {
+    all: unset;
+    background-color: $c6;
+    border-radius: 50px;
+    min-height: 60px;
+    min-width: 3px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  .music scale trough highlight {
+    all: unset;
+    background-color: $c4;
+    color: $c6;
+    border-radius: 50px;
+  }
+  .music scale trough {
+    all: unset;
+    background-color: $c6;
+    border-radius: 50px;
+    min-height: 60px;
+    min-width: 10px;
+  }
+
+  .music {
+    background: rgba($bg, 0.3);
+    border-radius: 6px;
+    border-style: solid;
+    border-color: $c6;
+    border-width: 2px;
+    padding: 5px;
+  }
+
+  .on{
+    color: $c6;
+  }
+
+  .off{
+    color: $c4;
+  }
+
+  .reloj{
+    font-size: larger;
+    font-weight: bold;
+  }
+
+//menu
+  .Pbuttons button{
+    background: rgba($bg, 0.985);
+    border-radius: 6px;
+    border-style: solid;
+    border-color: $c6;
+    border-width: 2px;
+    font-size: 60;
+    color: $c6;
+    transition: all;
+    transition-duration: 0.3s;
+    padding: 0px 15px;
+  }
+
+  .Pbuttons button:hover{
+    color: $c4;
+    border-color: $c4;
+    transition: all;
+    transition-duration: 600ms;
+  }
+
+  scale trough highlight {
+    all: unset;
+    background-color: $c4;
+    color: $c6;
+    border-radius: 25px;
+  }
+  scale trough {
+    all: unset;
+    background-color: $c6;
+    border-radius: 25px;
+    min-height: 600px;
+    min-width: 150px;
+  }
+  scale trough highlight {
+    all: unset;
+    background-color: $c4;
+    color: $c6;
+    border-radius: 25px;
+    min-width: 150px;
+  }
+  scale trough {
+    all: unset;
+    background-color: $c6;
+    border-radius: 25px;
+    min-height: 350px;
+    min-width: 150px;
+  }
+
+  .menu{
+    background-color: rgba(255,255,255,0.05);
+  }
+
+  .musicMenu{
+    background: rgba($bg, 0.985);
+    border-radius: 6px;
+    border-style: solid;
+    border-color: $c6;
+    border-width: 2px;
+    padding: 5px;
+    margin: 0px;
+    min-height: 345px;
+    min-width: 600px;
+    font-size: xx-large;
+  }
+
+  .musicMenu scale trough highlight {
+    all: unset;
+    background-color: $c4;
+    color: $c6;
+    border-radius: 0px;
+  }
+  .musicMenu scale trough {
+    all: unset;
+    background-color: $c6;
+    border-radius: 50px;
+    min-height: 15px;
+    min-width: 600px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  .musicMenu scale trough highlight {
+    all: unset;
+    background-color: $c4;
+    color: $c6;
+    border-radius: 50px;
+  }
+  .musicMenu scale trough {
+    all: unset;
+    background-color: $c6;
+    border-radius: 50px;
+    min-height: 15px;
+    min-width: 600px;
+  }
+
+  
+  .art{
+    font-size: medium;
+  }

@@ -1,0 +1,8 @@
+{
+    "editor.fontFamily": "'FiraCode Nerd Font Propo', 'monospace', monospace",
+    "editor.fontLigatures": true,
+    "workbench.sideBar.location": "right",
+    "workbench.activityBar.visible": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.matchBrackets": "always"
+}

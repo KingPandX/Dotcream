@@ -1,0 +1,221 @@
+;|--------------------------------------------------|
+;|#################Reloj del fondo##################|
+;|--------------------------------------------------|
+(defwindow time
+  :monitor 0
+  :namespace gtk-layer-shell
+  :geometry (geometry :x "20%"
+                      :y "20%"
+                      :width "20%"
+                      :height "10%"
+                      :anchor "top center")
+  :stacking "bg"
+  :wm-ignore true
+  (box :class "timer"
+  :orientation "v"
+  :space-evenly false
+  :spacing 0
+  (box :class "hour"
+  :orientation "v"
+  :space-evenly false
+  hour mins)
+  (box :class "date"
+  :orientation "v"
+  :space-evenly false
+  :spacing "0"
+  dateA dateB)
+  )
+  )
+
+  (defpoll hour :interval "1s" "date +%I")
+  (defpoll mins :interval "1s" "date +%M")
+  (defpoll dateA :interval "1s" "date +%y-%b")
+  (defpoll dateB :interval "1s" "date +%A")
+
+;|--------------------------------------------------|
+;|#################Barra de estado##################|
+;|--------------------------------------------------|
+
+(defwindow bar
+  :monitor 0
+  :exclusive false
+  :focusable "false"
+  :geometry (geometry :x "0px"
+                      :y "1%"
+                      :width "30px"
+                      :height "98%"
+                      :anchor "top left")
+  :stacking "bg"
+  (bar)
+)
+
+(defpoll time :interval "1s" "./scripts/music_info --time")
+(defpoll currenMusic :interval "1s" "./scripts/music_info --song")
+(defpoll art :interval "1s" "./scripts/music_info --artist")
+
+(defwidget bar []
+  (box :orientation "vertical"
+       :class "baras"
+    (workSpaces)
+      (reloj)
+    (music)
+  )
+)
+
+(defwidget reloj []
+  (box  :orientation "vertical"
+        :class "reloj"
+        :spacing -200
+      (label :text hour
+        :justify "center")
+      (label :text mins
+        :justify "center")
+      )
+)
+
+(defwidget workSpaces []
+  (box :orientation "vertical"
+       :valign "start"
+       :class "workSpace"
+       (button :onclick "hyprctl dispatch workspace 1" "1")
+       (button :onclick "hyprctl dispatch workspace 2" "2")
+       (button :onclick "hyprctl dispatch workspace 3" "3")
+       (button :onclick "hyprctl dispatch workspace 4" "4")
+       (button :onclick "hyprctl dispatch workspace 5" "5")
+       (button :onclick "hyprctl dispatch workspace 6" "6")
+       (button :onclick "hyprctl dispatch workspace 7" "7")
+       (button :onclick "hyprctl dispatch workspace 8" "8")
+       (button :onclick "hyprctl dispatch workspace 9" "9")
+       (button :onclick "hyprctl dispatch workspace 10" "10"))
+)
+
+(defpoll randomStyle :interval "1s" "./scripts/music_info --israndom")
+
+(defwidget music []
+  (box :orientation "vertical"
+       :valign "end"
+       :class "music"
+       :spacing 10
+       (box :orientation "v"
+      :halign "center"
+      (scale 
+        :class "barra"
+        :flipped true
+        :orientation "v"
+        :min 0
+        :max 100
+        :onchange "mpc seek {}%"
+        :value time)
+    )
+        (box
+          :orientation "v"
+          (button :onclick "mpc prev" "󰙣")
+          (button :onclick "mpc toggle" "󰐌")
+          (button :onclick "mpc next" "󰙡")
+          (button :class randomStyle :onclick "./scripts/music_info --random" ""))) 
+    )
+
+;|--------------------------------------------------|
+;|#######################Menu#######################|
+;|--------------------------------------------------|
+
+(defwindow menu
+  :monitor 0
+  :namespace gtk-layer-shell
+  :geometry (geometry :x "0"
+                      :y "0"
+                      :width "100%"
+                      :height "100%"
+                      :anchor "top left")
+  :stacking "fg"
+  :windowtype "dock"
+(menu))
+
+  (defwidget menu []
+    (eventbox
+      :onclick "eww close menu"
+    (box
+      :orientation "horizontal"
+    :valign "center"
+    :halign "center"
+    :class "menun"
+    :space-evenly false
+    :spacing 20
+    (musicMenus)
+      (volum)
+    (powerbuttons))
+  )
+  )
+
+(defwidget powerbuttons []
+  (box
+  :orientation "vertical"
+  :valign "center"
+  :halign "start"
+  :class "Pbuttons"
+  :spacing 10
+    (button :onclick "shutdown -h now" "⏻")
+    (button :onclick "reboot" "󰦛")
+    (button :onclick "./scripts/lock" "")
+    (button :onclick "bspc quit & hyprctl dispatch exit" "󰗼")
+)
+)
+
+(defpoll aud :interval "1s" "pactl get-sink-volume $(pactl get-default-sink) | awk -F '[^0-9]+' '/left:/{print $3}'")
+
+(defpoll mpcVol :interval "1s" "./scripts/music_info --getvolume")
+
+(defwidget volum []
+  (box
+  :orientation "h"
+  :valign "center"
+  :halign "end"
+  :class "Pbuttons"
+  :spacing 10
+  (scale 
+    :class "barra"
+    :flipped true
+    :orientation "v"
+    :min 0
+    :max 150
+    :onchange "pulsemixer --set-volume {}"
+    :value aud)
+  
+  (scale 
+    :class "barra"
+    :flipped true
+    :orientation "v"
+    :min 0
+    :max 100
+    :onchange "mpc volume {}"
+    :value mpcVol)
+)
+)
+
+(defwidget musicMenus []
+  (box :orientation "vertical"
+       :valign "center"
+       :halign "start"
+       :class "musicMenu"
+       :spacing 10
+       (box :orientation "v"
+      :halign "center"
+      (label :text currenMusic 
+        :limit-width 30
+      (label :class "art" :text art)
+    )
+    (scale 
+      :class "barra"
+      :flipped false
+      :orientation "h"
+      :min 0
+      :max 100
+      :onchange "mpc seek {}%"
+      :value time)
+        (box
+          :orientation "h"
+          (button :onclick "mpc prev" "󰙣")
+          (button :onclick "mpc toggle" "󰐌")
+          (button :onclick "mpc next" "󰙡")
+          (button :class randomStyle :onclick "./scripts/music_info --random" ""))) 
+    ))
